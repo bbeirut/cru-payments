@@ -49,8 +49,8 @@ export function validate(cardNumber: string|number, cvvInput: string|number, mon
     expiryDate.validate.all(month, year);
 }
 
-export function encrypt(cardNumber: string|number, cvv: string|number, month: string|number, year: string|number){
-  if(!validate(cardNumber, cvv, month, year)){
+export function encrypt(cardNumber: string|number, cvv: string|number, month: string|number, year: string|number, validateCard: boolean = true){
+  if(validateCard && !validate(cardNumber, cvv, month, year)){
     return Observable.throw('Credit card details invalid');
   }
   // allow CVV to be optional if it is null
